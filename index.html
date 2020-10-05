@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" />
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <title>Weather Dash</title>
+
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-3 sidebar">
+                <form id="weather-form">
+                    <label for="city-input">Search for a City</label>
+                    <input type="text" id="city-input"><br>
+
+                    <!-- This button will trigger our AJAX call -->
+                    <input id="find-city" type="submit" value="City Search">
+                </form>
+                <div id="btn-history">
+                </div>
+            </div>
+
+            <div class="col-9 not-sidebar">
+                <h2 class="cityName">Search for weather by city name</h2>
+                <p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p>
+                <!-- We'll be dumping our JSON contents in here -->
+                <!-- <div id="city-view"></div> -->
+                <table class="tableCurrent">
+                    <thead>
+                        <tr>
+                            <!-- The scope attribute specifies that this is a header for a column -->
+                            <th scope="col">Date</th>
+                            <th scope="col">Icon</th>
+                            <th scope="col">Temp</th>
+                            <th scope="col">Humidity</th>
+                            <th scope="col">Wind</th>
+                            <th scope="col">UV</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="date">2014</td>
+                            <td class="icon">Ellen Burstyn, Matthew McConaughey, Mackenzie Foy, John Lithgow</td>
+                            <td class="temp"></td>
+                            <td class="humidity"></td>
+                            <td class="wind"></td>
+                            <td class="UV"></td>
+                        </tr>
+                        <!-- Insert additional movie rows here -->
+                    </tbody>
+                </table>
+
+                <table class="tableForecast">
+                    <thead>
+                        <tr>
+                            <!-- The scope attribute specifies that this is a header for a column -->
+                            <th scope="col">Date</th>
+                            <th scope="col">Icon</th>
+                            <th scope="col">Temp</th>
+                            <th scope="col">Humidity</th>
+                        </tr>
+                    </thead>
+                    <tbody class=table2>
+                        <!-- Insert additional movie rows here -->
+                        <tr>
+                            <td class="date">2014</td>
+                            <td class="icon">Ellen</td>
+                            <td class="temp"></td>
+                            <td class="humidity"></td>
+                        </tr>    
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================================================== -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        var cities = [];
+        var response2 = "";
+        // This .on("click") function will trigger the AJAX Call
+        $("#find-city").on("click", function (event) {
+
+            event.preventDefault();
+
+            // This line will grab the text from the input box
+            var city = $("#city-input").val().trim();
+            var dubcity = false;
+            for (let i = 0; i < cities.length; i++) {
+                if (city === cities[i]) {
+                    dubcity = true;
+                }
+            }
+            if (dubcity === false)  {
+                cities.push(city);
+            }
+
+            $("#btn-history").empty()
+            // Looping through the array of movies
+            for (var i = 0; i < cities.length; i++) {
+
+                // Then dynamicaly generating buttons for each movie in the array.
+                // This code $("<button>") is all jQuery needs to create the start and end tag. (<button></button>)
+                var a = $("<button>");
+                // Adding a class
+                a.addClass("city");
+                // Adding a data-attribute with a value of the movie at index i
+                a.attr("data-name", cities[i]);
+                // Providing the button's text with a value of the movie at index i
+                a.text(cities[i]);
+                // Adding the button to the HTML
+                $("#btn-history").append(a);
+                $()
+
+
+            }
+
+            var createRow = function (data) {
+                // Create a new table row element
+                var tRow1 = $("<tr>");
+                var tRow2 = $("<tr>");
+                var tRow3 = $("<tr>");
+                var tRow4 = $("<tr>");
+                var tRow5 = $("<tr>");
+
+                // Methods run on jQuery selectors return the selector they we run on
+                // This is why we can create and save a reference to a td in the same statement we update its text
+                var forecastDate1 = $("<td>").text(data.list[8].dt_txt);
+                var forecastIcon1 = $("<td>").text(data.list[8].weather[0].icon);
+                var forecastTemp1 = $("<td>").text(data.list[8].main.temp);
+                var forecastHumidity1 = $("<td>").text(data.list[8].main.humidity);
+
+                var forecastDate2 = $("<td>").text(data.list[16].dt_txt);
+                var forecastIcon2 = $("<td>").text(data.list[16].weather[0].icon);
+                var forecastTemp2 = $("<td>").text(data.list[16].main.temp);
+                var forecastHumidity2 = $("<td>").text(data.list[16].main.humidity);
+
+                var forecastDate3 = $("<td>").text(data.list[24].dt_txt);
+                var forecastIcon3 = $("<td>").text(data.list[24].weather[0].icon);
+                var forecastTemp3 = $("<td>").text(data.list[24].main.temp);
+                var forecastHumidity3 = $("<td>").text(data.list[24].main.humidity);
+
+                var forecastDate4 = $("<td>").text(data.list[32].dt_txt);
+                var forecastIcon4 = $("<td>").text(data.list[32].weather[0].icon);
+                var forecastTemp4 = $("<td>").text(data.list[32].main.temp);
+                var forecastHumidity4 = $("<td>").text(data.list[32].main.humidity);
+
+                var forecastDate5 = $("<td>").text(data.list[39].dt_txt);
+                var forecastIcon5 = $("<td>").text(data.list[39].weather[0].icon);
+                var forecastTemp5 = $("<td>").text(data.list[39].main.temp);
+                var forecastHumidity5 = $("<td>").text(data.list[39].main.humidity);
+
+                // Append the newly created table data to the table row
+                tRow1.append(forecastDate1, forecastIcon1, forecastTemp1, forecastHumidity1);
+                tRow2.append(forecastDate2, forecastIcon2, forecastTemp2, forecastHumidity2);
+                tRow3.append(forecastDate3, forecastIcon3, forecastTemp3, forecastHumidity3);
+                tRow4.append(forecastDate4, forecastIcon4, forecastTemp4, forecastHumidity4);
+                tRow5.append(forecastDate5, forecastIcon5, forecastTemp5, forecastHumidity5);
+                // Append the table row to the table body
+                $("tbody.table2").append(tRow1);
+                $("tbody.table2").append(tRow2);
+                $("tbody.table2").append(tRow3);
+                $("tbody.table2").append(tRow4);
+                $("tbody.table2").append(tRow5);
+            };
+
+            // event.preventDefault() can be used to prevent an event's default behavior.
+            // Here, it prevents the submit button from trying to submit a form when clicked
+            event.preventDefault();
+
+            // Here we grab the text from the input box
+            var city = $("#city-input").val().trim();
+
+            // Here we construct our URL
+            var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=dc915575c90b63326c2faf5ea7653a4c";
+
+
+
+
+
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+            }).then(function (response) {
+                console.log(response);
+                //   $("#city-view").text(JSON.stringify(response));
+                response2 = response;
+                createRow(response);
+
+
+                $(".cityName").html("<h1>" + response2.city.name + " Weather Details</h1>");
+                $(".date").text(response2.list[0].dt_txt);
+                $(".icon").text(response2.list[0].weather[0].icon);
+                $(".temp").text(response2.list[0].main.temp);
+                $(".humidity").text(response2.list[0].main.humidity);
+                $(".wind").text(response2.list[0].wind.speed);
+                // $(".UV").text();
+
+
+            });
+
+
+        });
+    </script>
+</body>
+
+</html>
