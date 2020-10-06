@@ -167,8 +167,7 @@
                         $(".temp").text(response2.list[0].main.temp);
                         $(".humidity").text(response2.list[0].main.humidity);
                         $(".wind").text(response2.list[0].wind.speed);
-                        // $(".UV").text();
-
+                        // $(".UV").text(response2.city.coord.lat);
 
                         $(".date1").text(response2.list[8].dt_txt);
                         $(".icon1").text(response2.list[8].weather[0].icon);
@@ -195,10 +194,39 @@
                         $(".temp5").text(response2.list[39].main.temp);
                         $(".humidity5").text(response2.list[39].main.humidity);
 
+                        var lat = response2.city.coord.lat;
+                        var lon = response2.city.coord.lon;
+
+                        var queryURL = "http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=dc915575c90b63326c2faf5ea7653a4c";
+
+                        $.ajax({
+                            url: queryURL,
+                            method: "GET"
+                        }).then(function (response) {
+                            console.log(response);
+                            //   $("#city-view").text(JSON.stringify(response));
+                            response2 = response;
+                            // createRow(response);
+
+                            $(".UV").text(response2.value);
+
+                            if (response2.value < 3) {
+                                $(".UV").css("background-color", "green");
+                            }
+                            else if (response2.value > 6) {
+                                $(".UV").css("background-color", "orange");
+                            }
+                            else {
+                                $(".UV").css("background-color", "yellow");
+                            }
+
+
+
+                        });
 
                     });
-                })
 
+                })
 
             }
 
@@ -261,10 +289,6 @@
             // Here we construct our URL
             var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=dc915575c90b63326c2faf5ea7653a4c";
 
-
-
-
-
             $.ajax({
                 url: queryURL,
                 method: "GET"
@@ -274,14 +298,13 @@
                 response2 = response;
                 // createRow(response);
 
-
                 $(".cityName").html("<h1>" + response2.city.name + " Weather Details</h1>");
                 $(".date").text(response2.list[0].dt_txt);
                 $(".icon").text(response2.list[0].weather[0].icon);
                 $(".temp").text(response2.list[0].main.temp);
                 $(".humidity").text(response2.list[0].main.humidity);
                 $(".wind").text(response2.list[0].wind.speed);
-                // $(".UV").text();
+                // $(".UV").text(response2.city.coord.lat);
 
                 $(".date1").text(response2.list[8].dt_txt);
                 $(".icon1").text(response2.list[8].weather[0].icon);
@@ -308,10 +331,35 @@
                 $(".temp5").text(response2.list[39].main.temp);
                 $(".humidity5").text(response2.list[39].main.humidity);
 
+                var lat = response2.city.coord.lat;
+                var lon = response2.city.coord.lon;
+
+                var queryURL = "http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=dc915575c90b63326c2faf5ea7653a4c";
+
+                $.ajax({
+                    url: queryURL,
+                    method: "GET"
+                }).then(function (response) {
+                    console.log(response);
+                    //   $("#city-view").text(JSON.stringify(response));
+                    response2 = response;
+                    // createRow(response);
+                    console.log(response2.value)
+                    $(".UV").text(response2.value);
+
+                    if (response2.value < 3) {
+                        $(".UV").css("background-color", "green");
+                    }
+                    else if (response2.value > 6) {
+                        $(".UV").css("background-color", "orange");
+                    }
+                    else {
+                        $(".UV").css("background-color", "yellow");
+                    }
+
+                });
 
             });
-
-
         });
     </script>
 </body>
