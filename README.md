@@ -7,6 +7,9 @@ Help plan your travels by getting forecasts for your destinations!
 
 ## Links
 
+https://github.com/penguinorange/weather_dashboard_api
+
+https://penguinorange.github.io/weather_dashboard_api/
 
 
 ## Screenshots
