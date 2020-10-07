@@ -14,7 +14,7 @@
 
 </head>
 
-<body>
+<body onload="searchStore()">
     <div class="container">
         <div class="row">
             <div class="col-3 sidebar">
@@ -35,7 +35,7 @@
                 <!-- We'll be dumping our JSON contents in here -->
                 <!-- <div id="city-view"></div> -->
                 <table class="tableCurrent">
-                    <thead>
+                    <thead class="theadCurrent">
                         <tr>
                             <!-- The scope attribute specifies that this is a header for a column -->
                             <th scope="col">Date</th>
@@ -48,19 +48,19 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="date">2014</td>
-                            <td class="icon">Ellen Burstyn, Matthew McConaughey, Mackenzie Foy, John Lithgow</td>
-                            <td class="temp"></td>
-                            <td class="humidity"></td>
-                            <td class="wind"></td>
-                            <td class="UV"></td>
+                            <td class="date">n/a</td>
+                            <td class="icon"><img id="wicon" src="" alt="Weather icon"></td>
+                            <td class="temp">n/a</td>
+                            <td class="humidity">n/a</td>
+                            <td class="wind">n/a</td>
+                            <td class="UV">n/a</td>
                         </tr>
                         <!-- Insert additional movie rows here -->
                     </tbody>
                 </table>
                 <h2>Five Day Forecast</h2>
                 <table class="tableForecast">
-                    <thead>
+                    <thead class=theadForecast>
                         <tr>
                             <!-- The scope attribute specifies that this is a header for a column -->
                             <th scope="col">Date</th>
@@ -72,34 +72,34 @@
                     <tbody class=table2>
                         <!-- Insert additional movie rows here -->
                         <tr>
-                            <td class="date1">2014</td>
-                            <td class="icon1">Ellen</td>
-                            <td class="temp1"></td>
-                            <td class="humidity1"></td>
+                            <td class="date1">n/a</td>
+                            <td class="icon1"><img id="wicon1" src="" alt="Weather icon"></td>
+                            <td class="temp1">n/a</td>
+                            <td class="humidity1">n/a</td>
                         </tr>
                         <tr>
-                            <td class="date2">2014</td>
-                            <td class="icon2">Ellen</td>
-                            <td class="temp2"></td>
-                            <td class="humidity2"></td>
+                            <td class="date2">n/a</td>
+                            <td class="icon2"><img id="wicon2" src="" alt="Weather icon"></td>
+                            <td class="temp2">n/a</td>
+                            <td class="humidity2">n/a</td>
                         </tr>
                         <tr>
-                            <td class="date3">2014</td>
-                            <td class="icon3">Ellen</td>
-                            <td class="temp3"></td>
-                            <td class="humidity3"></td>
+                            <td class="date3">n/a</td>
+                            <td class="icon3"><img id="wicon3" src="" alt="Weather icon"></td>
+                            <td class="temp3">n/a</td>
+                            <td class="humidity3">n/a</td>
                         </tr>
                         <tr>
-                            <td class="date4">2014</td>
-                            <td class="icon4">Ellen</td>
-                            <td class="temp4"></td>
-                            <td class="humidity4"></td>
+                            <td class="date4">n/a</td>
+                            <td class="icon4"><img id="wicon4" src="" alt="Weather icon"></td>
+                            <td class="temp4">n/a</td>
+                            <td class="humidity4">n/a</td>
                         </tr>
                         <tr>
-                            <td class="date5">2014</td>
-                            <td class="icon5">Ellen</td>
-                            <td class="temp5"></td>
-                            <td class="humidity5"></td>
+                            <td class="date5">n/a</td>
+                            <td class="icon5"><img id="wicon5" src="" alt="Weather icon"></td>
+                            <td class="temp5">n/a</td>
+                            <td class="humidity5">n/a</td>
                         </tr>
                     </tbody>
                 </table>
@@ -110,258 +110,8 @@
     <!-- ======================================================== -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript">
+    <script type="text/javascript" src="script.js"></script>
 
-        var cities = [];
-        var response2 = "";
-        // This .on("click") function will trigger the AJAX Call
-        $("#find-city").on("click", function (event) {
-
-            event.preventDefault();
-
-            // This line will grab the text from the input box
-            var city = $("#city-input").val().trim();
-            var dubcity = false;
-            for (let i = 0; i < cities.length; i++) {
-                if (city === cities[i]) {
-                    dubcity = true;
-                }
-            }
-            if (dubcity === false) {
-                cities.push(city);
-            }
-
-            $("#btn-history").empty()
-            // Looping through the array of movies
-            for (var i = 0; i < cities.length; i++) {
-
-                // Then dynamicaly generating buttons for each movie in the array.
-                // This code $("<button>") is all jQuery needs to create the start and end tag. (<button></button>)
-                var a = $("<button>");
-                // Adding a class
-                a.addClass("city");
-                // Adding a data-attribute with a value of the movie at index i
-                a.attr("data-name", cities[i]);
-                // Providing the button's text with a value of the movie at index i
-                a.text(cities[i]);
-                // Adding the button to the HTML
-                $("#btn-history").append(a);
-                a.on("click", function () {
-                    var city = $(this).attr('data-name')
-                    console.log($(this).attr('data-name'))
-                    // Here we construct our URL
-                    var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=dc915575c90b63326c2faf5ea7653a4c";
-                    console.log(queryURL)
-                    $.ajax({
-                        url: queryURL,
-                        method: "GET"
-                    }).then(function (response) {
-                        console.log(response);
-                        //   $("#city-view").text(JSON.stringify(response));
-                        response2 = response;
-                        // createRow(response);
-
-                        $(".cityName").html("<h1>" + response2.city.name + " Weather Details</h1>");
-                        $(".date").text(response2.list[0].dt_txt);
-                        $(".icon").text(response2.list[0].weather[0].icon);
-                        $(".temp").text(response2.list[0].main.temp);
-                        $(".humidity").text(response2.list[0].main.humidity);
-                        $(".wind").text(response2.list[0].wind.speed);
-                        // $(".UV").text(response2.city.coord.lat);
-
-                        $(".date1").text(response2.list[8].dt_txt);
-                        $(".icon1").text(response2.list[8].weather[0].icon);
-                        $(".temp1").text(response2.list[8].main.temp);
-                        $(".humidity1").text(response2.list[8].main.humidity);
-
-                        $(".date2").text(response2.list[16].dt_txt);
-                        $(".icon2").text(response2.list[16].weather[0].icon);
-                        $(".temp2").text(response2.list[16].main.temp);
-                        $(".humidity2").text(response2.list[16].main.humidity);
-
-                        $(".date3").text(response2.list[24].dt_txt);
-                        $(".icon3").text(response2.list[24].weather[0].icon);
-                        $(".temp3").text(response2.list[24].main.temp);
-                        $(".humidity3").text(response2.list[24].main.humidity);
-
-                        $(".date4").text(response2.list[32].dt_txt);
-                        $(".icon4").text(response2.list[32].weather[0].icon);
-                        $(".temp4").text(response2.list[32].main.temp);
-                        $(".humidity4").text(response2.list[32].main.humidity);
-
-                        $(".date5").text(response2.list[39].dt_txt);
-                        $(".icon5").text(response2.list[39].weather[0].icon);
-                        $(".temp5").text(response2.list[39].main.temp);
-                        $(".humidity5").text(response2.list[39].main.humidity);
-
-                        var lat = response2.city.coord.lat;
-                        var lon = response2.city.coord.lon;
-
-                        var queryURL = "http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=dc915575c90b63326c2faf5ea7653a4c";
-
-                        $.ajax({
-                            url: queryURL,
-                            method: "GET"
-                        }).then(function (response) {
-                            console.log(response);
-                            //   $("#city-view").text(JSON.stringify(response));
-                            response2 = response;
-                            // createRow(response);
-
-                            $(".UV").text(response2.value);
-
-                            if (response2.value < 3) {
-                                $(".UV").css("background-color", "green");
-                            }
-                            else if (response2.value > 6) {
-                                $(".UV").css("background-color", "orange");
-                            }
-                            else {
-                                $(".UV").css("background-color", "yellow");
-                            }
-
-
-
-                        });
-
-                    });
-
-                })
-
-            }
-
-            // var createRow = function (data) {
-            //     // Create a new table row element
-            //     var tRow1 = $("<tr>");
-            //     var tRow2 = $("<tr>");
-            //     var tRow3 = $("<tr>");
-            //     var tRow4 = $("<tr>");
-            //     var tRow5 = $("<tr>");
-
-            //     // Methods run on jQuery selectors return the selector they we run on
-            //     // This is why we can create and save a reference to a td in the same statement we update its text
-            //     var forecastDate1 = $("<td>").text(data.list[8].dt_txt);
-            //     var forecastIcon1 = $("<td>").text(data.list[8].weather[0].icon);
-            //     var forecastTemp1 = $("<td>").text(data.list[8].main.temp);
-            //     var forecastHumidity1 = $("<td>").text(data.list[8].main.humidity);
-
-            //     var forecastDate2 = $("<td>").text(data.list[16].dt_txt);
-            //     var forecastIcon2 = $("<td>").text(data.list[16].weather[0].icon);
-            //     var forecastTemp2 = $("<td>").text(data.list[16].main.temp);
-            //     var forecastHumidity2 = $("<td>").text(data.list[16].main.humidity);
-
-            //     var forecastDate3 = $("<td>").text(data.list[24].dt_txt);
-            //     var forecastIcon3 = $("<td>").text(data.list[24].weather[0].icon);
-            //     var forecastTemp3 = $("<td>").text(data.list[24].main.temp);
-            //     var forecastHumidity3 = $("<td>").text(data.list[24].main.humidity);
-
-            //     var forecastDate4 = $("<td>").text(data.list[32].dt_txt);
-            //     var forecastIcon4 = $("<td>").text(data.list[32].weather[0].icon);
-            //     var forecastTemp4 = $("<td>").text(data.list[32].main.temp);
-            //     var forecastHumidity4 = $("<td>").text(data.list[32].main.humidity);
-
-            //     var forecastDate5 = $("<td>").text(data.list[39].dt_txt);
-            //     var forecastIcon5 = $("<td>").text(data.list[39].weather[0].icon);
-            //     var forecastTemp5 = $("<td>").text(data.list[39].main.temp);
-            //     var forecastHumidity5 = $("<td>").text(data.list[39].main.humidity);
-
-            //     // Append the newly created table data to the table row
-            //     tRow1.append(forecastDate1, forecastIcon1, forecastTemp1, forecastHumidity1);
-            //     tRow2.append(forecastDate2, forecastIcon2, forecastTemp2, forecastHumidity2);
-            //     tRow3.append(forecastDate3, forecastIcon3, forecastTemp3, forecastHumidity3);
-            //     tRow4.append(forecastDate4, forecastIcon4, forecastTemp4, forecastHumidity4);
-            //     tRow5.append(forecastDate5, forecastIcon5, forecastTemp5, forecastHumidity5);
-            //     // Append the table row to the table body
-            //     $("tbody.table2").append(tRow1);
-            //     $("tbody.table2").append(tRow2);
-            //     $("tbody.table2").append(tRow3);
-            //     $("tbody.table2").append(tRow4);
-            //     $("tbody.table2").append(tRow5);
-            // };
-
-            // event.preventDefault() can be used to prevent an event's default behavior.
-            // Here, it prevents the submit button from trying to submit a form when clicked
-            event.preventDefault();
-
-            // Here we grab the text from the input box
-            var city = $("#city-input").val().trim();
-
-            // Here we construct our URL
-            var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=dc915575c90b63326c2faf5ea7653a4c";
-
-            $.ajax({
-                url: queryURL,
-                method: "GET"
-            }).then(function (response) {
-                console.log(response);
-                //   $("#city-view").text(JSON.stringify(response));
-                response2 = response;
-                // createRow(response);
-
-                $(".cityName").html("<h1>" + response2.city.name + " Weather Details</h1>");
-                $(".date").text(response2.list[0].dt_txt);
-                $(".icon").text(response2.list[0].weather[0].icon);
-                $(".temp").text(response2.list[0].main.temp);
-                $(".humidity").text(response2.list[0].main.humidity);
-                $(".wind").text(response2.list[0].wind.speed);
-                // $(".UV").text(response2.city.coord.lat);
-
-                $(".date1").text(response2.list[8].dt_txt);
-                $(".icon1").text(response2.list[8].weather[0].icon);
-                $(".temp1").text(response2.list[8].main.temp);
-                $(".humidity1").text(response2.list[8].main.humidity);
-
-                $(".date2").text(response2.list[16].dt_txt);
-                $(".icon2").text(response2.list[16].weather[0].icon);
-                $(".temp2").text(response2.list[16].main.temp);
-                $(".humidity2").text(response2.list[16].main.humidity);
-
-                $(".date3").text(response2.list[24].dt_txt);
-                $(".icon3").text(response2.list[24].weather[0].icon);
-                $(".temp3").text(response2.list[24].main.temp);
-                $(".humidity3").text(response2.list[24].main.humidity);
-
-                $(".date4").text(response2.list[32].dt_txt);
-                $(".icon4").text(response2.list[32].weather[0].icon);
-                $(".temp4").text(response2.list[32].main.temp);
-                $(".humidity4").text(response2.list[32].main.humidity);
-
-                $(".date5").text(response2.list[39].dt_txt);
-                $(".icon5").text(response2.list[39].weather[0].icon);
-                $(".temp5").text(response2.list[39].main.temp);
-                $(".humidity5").text(response2.list[39].main.humidity);
-
-                var lat = response2.city.coord.lat;
-                var lon = response2.city.coord.lon;
-
-                var queryURL = "http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=dc915575c90b63326c2faf5ea7653a4c";
-
-                $.ajax({
-                    url: queryURL,
-                    method: "GET"
-                }).then(function (response) {
-                    console.log(response);
-                    //   $("#city-view").text(JSON.stringify(response));
-                    response2 = response;
-                    // createRow(response);
-                    console.log(response2.value)
-                    $(".UV").text(response2.value);
-
-                    if (response2.value < 3) {
-                        $(".UV").css("background-color", "green");
-                    }
-                    else if (response2.value > 6) {
-                        $(".UV").css("background-color", "orange");
-                    }
-                    else {
-                        $(".UV").css("background-color", "yellow");
-                    }
-
-                });
-
-            });
-        });
-    </script>
 </body>
 
 </html>

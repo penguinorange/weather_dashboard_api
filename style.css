@@ -4,7 +4,7 @@
 }
 
 .sidebar {
-    background-color: gray;
+    background-color: lightseagreen;
 }
 
 table.tableCurrent   {
@@ -20,5 +20,13 @@ table.tableForecast {
 
 table, th, td {
     border: 1px solid black;
+    text-align: center;
   }
 
+.theadCurrent  {
+    background-color: plum;
+}
+
+.theadForecast  {
+    background-color: lightpink;
+}
