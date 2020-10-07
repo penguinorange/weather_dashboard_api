@@ -4,7 +4,7 @@ function searchStore() {
     formerSearch = JSON.parse(localStorage.getItem("city"));
     console.log(formerSearch)
     city = formerSearch
-    var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=dc915575c90b63326c2faf5ea7653a4c";
+    var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=dc915575c90b63326c2faf5ea7653a4c";
 
     $.ajax({
         url: queryURL,
@@ -13,7 +13,7 @@ function searchStore() {
         response2 = response;
 
         var iconcode = response2.list[0].weather[0].icon;
-        var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png"
+        var iconurl = "https://openweathermap.org/img/w/" + iconcode + ".png"
         $('#wicon').attr('src', iconurl);
         $(".cityName").html("<h1><strong>" + response2.city.name + "</strong> Weather Details</h1>");
         $(".date").text(response2.list[0].dt_txt);
@@ -22,35 +22,35 @@ function searchStore() {
         $(".wind").text(response2.list[0].wind.speed);
 
         var iconcode1 = response2.list[8].weather[0].icon;
-        var iconurl1 = "http://openweathermap.org/img/w/" + iconcode1 + ".png"
+        var iconurl1 = "https://openweathermap.org/img/w/" + iconcode1 + ".png"
         $('#wicon1').attr('src', iconurl1);
         $(".date1").text(response2.list[8].dt_txt);
         $(".temp1").text(response2.list[8].main.temp);
         $(".humidity1").text(response2.list[8].main.humidity);
 
         var iconcode2 = response2.list[16].weather[0].icon;
-        var iconurl2 = "http://openweathermap.org/img/w/" + iconcode2 + ".png"
+        var iconurl2 = "https://openweathermap.org/img/w/" + iconcode2 + ".png"
         $('#wicon2').attr('src', iconurl2);
         $(".date2").text(response2.list[16].dt_txt);
         $(".temp2").text(response2.list[16].main.temp);
         $(".humidity2").text(response2.list[16].main.humidity);
 
         var iconcode3 = response2.list[24].weather[0].icon;
-        var iconurl3 = "http://openweathermap.org/img/w/" + iconcode3 + ".png"
+        var iconurl3 = "https://openweathermap.org/img/w/" + iconcode3 + ".png"
         $('#wicon3').attr('src', iconurl3);
         $(".date3").text(response2.list[24].dt_txt);
         $(".temp3").text(response2.list[24].main.temp);
         $(".humidity3").text(response2.list[24].main.humidity);
 
         var iconcode4 = response2.list[32].weather[0].icon;
-        var iconurl4 = "http://openweathermap.org/img/w/" + iconcode4 + ".png"
+        var iconurl4 = "https://openweathermap.org/img/w/" + iconcode4 + ".png"
         $('#wicon4').attr('src', iconurl4);
         $(".date4").text(response2.list[32].dt_txt);
         $(".temp4").text(response2.list[32].main.temp);
         $(".humidity4").text(response2.list[32].main.humidity);
 
         var iconcode5 = response2.list[39].weather[0].icon;
-        var iconurl5 = "http://openweathermap.org/img/w/" + iconcode5 + ".png"
+        var iconurl5 = "https://openweathermap.org/img/w/" + iconcode5 + ".png"
         $('#wicon5').attr('src', iconurl5);
         $(".date5").text(response2.list[39].dt_txt);
         $(".temp5").text(response2.list[39].main.temp);
@@ -59,7 +59,7 @@ function searchStore() {
         var lat = response2.city.coord.lat;
         var lon = response2.city.coord.lon;
 
-        var queryURL = "http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=dc915575c90b63326c2faf5ea7653a4c";
+        var queryURL = "https://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=dc915575c90b63326c2faf5ea7653a4c";
 
         $.ajax({
             url: queryURL,
@@ -116,7 +116,7 @@ $("#find-city").on("click", function (event) {
         a.on("click", function () {
             var city = $(this).attr('data-name')
         
-            var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=dc915575c90b63326c2faf5ea7653a4c";
+            var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=dc915575c90b63326c2faf5ea7653a4c";
             console.log(queryURL)
             $.ajax({
                 url: queryURL,
@@ -125,7 +125,7 @@ $("#find-city").on("click", function (event) {
                 response2 = response;
 
                 var iconcode = response2.list[0].weather[0].icon;
-                var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png"
+                var iconurl = "https://openweathermap.org/img/w/" + iconcode + ".png"
                 $('#wicon').attr('src', iconurl);
                 $(".cityName").html("<h1><strong>" + response2.city.name + "</strong> Weather Details</h1>");
                 $(".date").text(response2.list[0].dt_txt);
@@ -134,35 +134,35 @@ $("#find-city").on("click", function (event) {
                 $(".wind").text(response2.list[0].wind.speed);
 
                 var iconcode1 = response2.list[8].weather[0].icon;
-                var iconurl1 = "http://openweathermap.org/img/w/" + iconcode1 + ".png"
+                var iconurl1 = "https://openweathermap.org/img/w/" + iconcode1 + ".png"
                 $('#wicon1').attr('src', iconurl1);
                 $(".date1").text(response2.list[8].dt_txt);
                 $(".temp1").text(response2.list[8].main.temp);
                 $(".humidity1").text(response2.list[8].main.humidity);
 
                 var iconcode2 = response2.list[16].weather[0].icon;
-                var iconurl2 = "http://openweathermap.org/img/w/" + iconcode2 + ".png"
+                var iconurl2 = "https://openweathermap.org/img/w/" + iconcode2 + ".png"
                 $('#wicon2').attr('src', iconurl2);
                 $(".date2").text(response2.list[16].dt_txt);
                 $(".temp2").text(response2.list[16].main.temp);
                 $(".humidity2").text(response2.list[16].main.humidity);
 
                 var iconcode3 = response2.list[24].weather[0].icon;
-                var iconurl3 = "http://openweathermap.org/img/w/" + iconcode3 + ".png"
+                var iconurl3 = "https://openweathermap.org/img/w/" + iconcode3 + ".png"
                 $('#wicon3').attr('src', iconurl3);
                 $(".date3").text(response2.list[24].dt_txt);
                 $(".temp3").text(response2.list[24].main.temp);
                 $(".humidity3").text(response2.list[24].main.humidity);
 
                 var iconcode4 = response2.list[32].weather[0].icon;
-                var iconurl4 = "http://openweathermap.org/img/w/" + iconcode4 + ".png"
+                var iconurl4 = "https://openweathermap.org/img/w/" + iconcode4 + ".png"
                 $('#wicon4').attr('src', iconurl4);
                 $(".date4").text(response2.list[32].dt_txt);
                 $(".temp4").text(response2.list[32].main.temp);
                 $(".humidity4").text(response2.list[32].main.humidity);
 
                 var iconcode5 = response2.list[39].weather[0].icon;
-                var iconurl5 = "http://openweathermap.org/img/w/" + iconcode5 + ".png"
+                var iconurl5 = "https://openweathermap.org/img/w/" + iconcode5 + ".png"
                 $('#wicon5').attr('src', iconurl5);
                 $(".date5").text(response2.list[39].dt_txt);
                 $(".temp5").text(response2.list[39].main.temp);
@@ -171,7 +171,7 @@ $("#find-city").on("click", function (event) {
                 var lat = response2.city.coord.lat;
                 var lon = response2.city.coord.lon;
 
-                var queryURL = "http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=dc915575c90b63326c2faf5ea7653a4c";
+                var queryURL = "https://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=dc915575c90b63326c2faf5ea7653a4c";
 
                 $.ajax({
                     url: queryURL,
@@ -205,7 +205,7 @@ $("#find-city").on("click", function (event) {
     // set new submission
     localStorage.setItem("city", JSON.stringify(city));
 
-    var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=dc915575c90b63326c2faf5ea7653a4c";
+    var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=dc915575c90b63326c2faf5ea7653a4c";
 
     $.ajax({
         url: queryURL,
@@ -214,7 +214,7 @@ $("#find-city").on("click", function (event) {
         response2 = response;
 
         var iconcode = response2.list[0].weather[0].icon;
-        var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png"
+        var iconurl = "https://openweathermap.org/img/w/" + iconcode + ".png"
         $('#wicon').attr('src', iconurl);
         $(".cityName").html("<h1><strong>" + response2.city.name + "</strong> Weather Details</h1>");
         $(".date").text(response2.list[0].dt_txt);
@@ -223,35 +223,35 @@ $("#find-city").on("click", function (event) {
         $(".wind").text(response2.list[0].wind.speed);
 
         var iconcode1 = response2.list[8].weather[0].icon;
-        var iconurl1 = "http://openweathermap.org/img/w/" + iconcode1 + ".png"
+        var iconurl1 = "https://openweathermap.org/img/w/" + iconcode1 + ".png"
         $('#wicon1').attr('src', iconurl1);
         $(".date1").text(response2.list[8].dt_txt);
         $(".temp1").text(response2.list[8].main.temp);
         $(".humidity1").text(response2.list[8].main.humidity);
 
         var iconcode2 = response2.list[16].weather[0].icon;
-        var iconurl2 = "http://openweathermap.org/img/w/" + iconcode2 + ".png"
+        var iconurl2 = "https://openweathermap.org/img/w/" + iconcode2 + ".png"
         $('#wicon2').attr('src', iconurl2);
         $(".date2").text(response2.list[16].dt_txt);
         $(".temp2").text(response2.list[16].main.temp);
         $(".humidity2").text(response2.list[16].main.humidity);
 
         var iconcode3 = response2.list[24].weather[0].icon;
-        var iconurl3 = "http://openweathermap.org/img/w/" + iconcode3 + ".png"
+        var iconurl3 = "https://openweathermap.org/img/w/" + iconcode3 + ".png"
         $('#wicon3').attr('src', iconurl3);
         $(".date3").text(response2.list[24].dt_txt);
         $(".temp3").text(response2.list[24].main.temp);
         $(".humidity3").text(response2.list[24].main.humidity);
 
         var iconcode4 = response2.list[32].weather[0].icon;
-        var iconurl4 = "http://openweathermap.org/img/w/" + iconcode4 + ".png"
+        var iconurl4 = "https://openweathermap.org/img/w/" + iconcode4 + ".png"
         $('#wicon4').attr('src', iconurl4);
         $(".date4").text(response2.list[32].dt_txt);
         $(".temp4").text(response2.list[32].main.temp);
         $(".humidity4").text(response2.list[32].main.humidity);
 
         var iconcode5 = response2.list[39].weather[0].icon;
-        var iconurl5 = "http://openweathermap.org/img/w/" + iconcode5 + ".png"
+        var iconurl5 = "https://openweathermap.org/img/w/" + iconcode5 + ".png"
         $('#wicon5').attr('src', iconurl5);
         $(".date5").text(response2.list[39].dt_txt);
         $(".temp5").text(response2.list[39].main.temp);
@@ -260,7 +260,7 @@ $("#find-city").on("click", function (event) {
         var lat = response2.city.coord.lat;
         var lon = response2.city.coord.lon;
 
-        var queryURL = "http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=dc915575c90b63326c2faf5ea7653a4c";
+        var queryURL = "https://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=dc915575c90b63326c2faf5ea7653a4c";
 
         $.ajax({
             url: queryURL,
